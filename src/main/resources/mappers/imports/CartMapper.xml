@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.emarket.cart.CartMapper">
+    <resultMap id="cart" type="Cart" autoMapping="true" />
+    <select id="find" resultMap="cart">
+        SELECT * FROM cart
+    </select>
+
+    <select id="findById" resultMap="cart">
+        SELECT * FROM cart
+        WHERE item_id = @{id}
+    </select>
+
+    <select id="findTotalAmount" resultMap="cart">
+        SELECT price, quantity FROM cart
+    </select>
+
+    <insert id="insert">
+        INSERT INTO cart(item_id, item_name, price, quantity) VALUES (@{item.id}, @{item.name}, @{item.price}, @{quantity})
+    </insert>
+
+    <update id="update">
+        UPDATE cart
+        SET
+            quantity = @{quantity}
+        WHERE item_id = @{id}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM cart WHERE item_id = @{id}
+    </delete>
+</mapper>
